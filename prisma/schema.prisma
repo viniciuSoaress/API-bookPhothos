@@ -12,8 +12,6 @@ datasource db {
 
 
 model Photo{
-  id Int @id @default(autoincrement())
+  id String @id @default(uuid())
   avatar_url String
-
-  @@map("photos")
 }

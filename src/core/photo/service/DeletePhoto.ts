@@ -1,12 +1,13 @@
-import CasoDeUSo from "../../shared/CasoDeUso";
+import UseCase from "../../shared/useCase";
 import DataBase from "./DataBase";
 
-export default class Deletehoto implements CasoDeUSo<number, void>{
+export default class Deletehoto implements UseCase<string, string> {
 
-  constructor(readonly repisitorio: DataBase){}
+  constructor(readonly repisitorio: DataBase) { }
 
-  async executar(data: number): Promise<void> {
-   await this.repisitorio.delet(data)
+  async handle(data: string): Promise<string> {
+    const photo = await this.repisitorio.deletePhoto(data)
+    return photo
   }
-  
+
 }

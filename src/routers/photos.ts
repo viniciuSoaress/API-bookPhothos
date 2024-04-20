@@ -1,11 +1,28 @@
 import { Router } from "express";
-import PhotoController from "../controllers/photos/PhotosController";
+import DataBasePrisma from "../external/DataBasePrisma";
+import GetPhotos from "../core/photo/service/GetPhotos";
+import GetPhotosController from "../controllers/photos/getPhotosController";
+import GetPhotoById from "../core/photo/service/GetPhotoById";
+import GetPhotoByIdController from "../controllers/photos/getPhotoByIdContrller";
+import Deletehoto from "../core/photo/service/DeletePhoto";
+import DeletehotoController from "../controllers/photos/deletePhotoController";
+import PostPhoto from "../core/photo/service/PostPhoto";
+import PostPhotoController from "../controllers/photos/postPhotoController";
 
-const PControlle = new PhotoController()
 
+const photoRouter = Router()
+const prisma = new DataBasePrisma()
 
-export const photoRouter = Router()
+const postPhoto = new PostPhoto(prisma)
+new PostPhotoController(photoRouter, postPhoto)
 
-photoRouter.post('/photos', PControlle.post)
-photoRouter.get('/photos', PControlle.get)
-photoRouter.delete('/photos/:id', PControlle.delete)
+const getPhotos = new GetPhotos(prisma)
+new GetPhotosController(photoRouter, getPhotos)
+
+const getPothoById = new GetPhotoById(prisma)
+new GetPhotoByIdController(photoRouter, getPothoById)
+
+const deletePhoto = new Deletehoto(prisma)
+new DeletehotoController(photoRouter, deletePhoto)
+
+export default photoRouter

@@ -1,4 +1,4 @@
 export default interface Photo {
-  id?: number 
+  id?: string 
   avatar_url: string
 }
