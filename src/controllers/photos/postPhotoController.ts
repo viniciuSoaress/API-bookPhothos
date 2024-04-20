@@ -13,7 +13,7 @@ export default class PostPhotoController{
 
         const photo = await useCase.handle({avatar_url})
 
-        res.status(203).json(photo)
+        res.status(201).json(photo)
       } catch (error) {
         next(error)
       }
